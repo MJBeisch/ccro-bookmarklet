@@ -1,196 +1,182 @@
 .CCROvalidatorui {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    margin: 20px;
-    border: 2px solid #11122F;
-    min-width: 325px;
-    font-size: 14px;
-    line-height: 26px;
-    color: #000;
-    font-family: Arial, Helvetica, Sans-Serif;
-    background: #fff;
-    z-index: 999999999999;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	margin: 20px;
+	border: 2px solid #11122F;
+	min-width: 325px;
+	font-size: 14px;
+	line-height: 26px;
+	color: #000;
+	font-family: Arial, Helvetica, Sans-Serif;
+	background: #fff;
+	z-index: 999999999999;
 }
 
-.CCROvalidatorui .CCROv-button {
-    display: block;
-    border: 1px solid #aaa;
-    padding: 0 9px;
-    min-width: auto;
-    line-height: 17px;
-    text-decoration: none;
-    text-align: center;
-    letter-spacing: 1px;
-    font-weight: normal;
-    font-size: 11px;
-    color: #000;
-    cursor: pointer;
-    border-radius: 3px;
-    background: #ffffff;
-    background: -moz-linear-gradient(top, #ffffff 0%, #cccccc 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
-    background: -webkit-linear-gradient(top, #ffffff 0%, #cccccc 100%);
-    background: -o-linear-gradient(top, #ffffff 0%, #cccccc 100%);
-    background: -ms-linear-gradient(top, #ffffff 0%, #cccccc 100%);
-    background: linear-gradient(to bottom, #ffffff 0%, #cccccc 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ffffff", endColorstr="#cccccc", GradientType=0);
+.CCROv-button {
+	display: block;
+	padding: 0 9px;
+	min-width: auto;
+	text-decoration: none;
+	text-align: center;
+	letter-spacing: 1px;
+	font-weight: normal;
+	font-size: 11px;
+	color: #000;
+	cursor: pointer;
+	border-radius: 4px;
+	background: #ffffff;
 }
 
-.CCROvalidatorui .CCROv-button:hover {
-    border: 1px solid #aaa;
-    text-decoration: none;
-    color: #000;
-    background: #ccc;
+.CCROv-button:hover {
+	text-decoration: none;
+	color: #000;
+	background: #ccc;
 }
 
-.CCROvalidatorui .CCROv-button:active {
-    border: 1px solid #aaa;
-    text-decoration: none;
-    color: #000;
-    background: #aaa;
+.CCROv-button:active {
+	text-decoration: none;
+	color: #000;
+	background: #aaa;
+}
+
+.CCROv-button, .CCROv-button i {
+	line-height:25px;
 }
 
 .CCROvalidatoruiscroll {
-    overflow-x: hidden;
-    overflow-y: scroll;
-    max-height: 300px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	max-height: 300px;
 }
 
 .CCROvalidatoruicontent {
-    padding: 15px;
+	padding: 15px;
 }
 
 .CCROv-header {
-    overflow: hidden;
-    margin: 0;
-    padding: 10px;
-    background: #11122F;
+	overflow: hidden;
+	margin: 0;
+	padding: 10px;
+	background: #11122F;
 }
 
 .CCROv-header h2 {
-    margin: 0;
-    line-height: 25px;
-    font-weight: bold;
-    font-size: 16px;
-    font-family: Arial, Helvetica, Sans-Serif;
-    color: #FFF;
+	margin: 0;
+	line-height: 25px;
+	font-weight: bold;
+	font-size: 16px;
+	font-family: Arial, Helvetica, Sans-Serif;
+	color: #FFF;
 }
 
 .CCROvalidatoruicontent a {
-    text-decoration: underline;
-    color: #0084ff;
+	text-decoration: underline;
+	color: #0084ff;
 }
 
 .CCROvalidatoruicontent a:hover {
-    color: #0067c6;
+	color: #0067c6;
 }
 
 .CCROvalidatoruicontent a:active {
-    color: #004382;
+	color: #004382;
 }
 
 .CCROvalidatoruicontent p {
-    margin: 0 0 10px 0;
-    text-align: left;
-    line-height: 20px;
-    font-size: 14px;
+	margin: 0 0 10px 0;
+	text-align: left;
+	line-height: 20px;
+	font-size: 14px;
 }
 
 .CCROvalidatoruicontent form label {
-    margin-right: 10px;
-    font-size: 12px;
-    font-weight: bold;
+	margin-right: 10px;
+	font-size: 12px;
+	font-weight: bold;
 }
 
 .CCROvalidatoruicontent form input[type="text"] {
-    margin-right: 10px;
+	margin-right: 10px;
+}
+
+.CCROvalidatorOptions {
+	padding:15px;
+	color:#FFF;
+	background:#11122F;
 }
 
 .CCROvalidatoruicontent .experimentlist {
-    margin: 0 0 15px 0;
-    padding: 0;
-    font-size: 12px;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	border-collapse: collapse;
 }
 
 .CCROvalidatoruicontent .experimentlist caption {
-    margin: 0;
-    padding: 10px;
-    text-align: left;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 14px;
-    background: #ccc;
+	margin: 0;
+	padding: 10px;
+	text-align: left;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 14px;
+	background: #ccc;
 }
 
 .CCROvalidatoruicontent .experimentlist th,
 .CCROvalidatoruicontent .experimentlist td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    line-height: 20px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	line-height: 20px;
 }
 
 .CCROvalidatoruicontent .experimentlist th {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: normal;
-    color: #777;
-    background-color: transparent;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: normal;
+	font-size:14px;
+	color: #777;
+	background-color: transparent;
 }
 
 .CCROvalidatoruicontent tr.active .experiment-name {
-    font-weight: bold;
+	font-weight: bold;
 }
 
-.CCROvalidatoruicontent .experiment-name .active-state {
-    display: inline-block;
-    margin-right: 10px;
-    border: 1px solid #ffd40c;
-    width: 8px;
-    height: 8px;
-    background: #FFEB40;
-    border-radius: 5px;
+.CCROvalidatoruicontent .experiment-name .fa-circle {
+	color: #FFEB40;
 }
 
-.CCROvalidatoruicontent tr.active .experiment-name .active-state {
-    border: 1px solid #9caa46;
-    background: #BDCE62;
+.CCROvalidatoruicontent tr.active .experiment-name .fa-circle {
+	color: #BDCE62;
 }
 
 .CCROvalidatoruicontent .experimentlist select {
-    margin: 0;
-    min-width: auto;
-    width: 100px;
+	margin: 0;
+	min-width: auto;
+	width: 100px;
 }
 
 .CCROvalidatoruicontent .CCROvalidatorui h3 {
-    margin: 0 0 10px 0;
-    font-weight: bold;
-    font-size: 13px;
+	margin: 0 0 10px 0;
+	font-weight: bold;
+	font-size: 13px;
 }
 
 .CCROv-ui-buttons {
-    float: right;
+	float: right;
 }
 
 .CCROv-ui-buttons .CCROv-button {
-    float: left;
-    margin: 0 0 0 15px;
-    line-height: 21px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.CCROv-toggle:before {
-    content: "\u2012";
+	float: left;
+	margin: 0 0 0 15px;
+	line-height: 21px;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 .CCROvalidatorui.collapsed .CCROvalidatoruicontent {
-    display: none;
-}
-
-.CCROvalidatorui.collapsed .CCROv-toggle:before {
-    content: "\u002B";
+	display: none;
 }
 
 /* The switch - the box around the slider */
