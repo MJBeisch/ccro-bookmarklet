@@ -8,8 +8,6 @@ function CCROsaveSettings() {
 //Opens the CCRO overlay UI
 function CCROopen() {
 	$.getScript('https://corvuscro.com/js/CCROcookieFunctions.min.js', function() {
-		CCROsettings = CCROcookies.getJSON( 'eosvalidator' ); //get the EOS UI settings from the eosvalidator cookie
-
 		$('head').append('<link rel="stylesheet" type="text/css" href="https://corvuscro.com/css/CCRObookmarklet.min.css"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">');
 
 		//Check for presence of CCROsettings cookie
@@ -44,12 +42,16 @@ function CCROtoggle() {
 		CCROsettings.toggle = 0;
 
 		$(".CCROoverlayui").addClass('collapsed');
+
+		$('.CCROv-toggle .fa-minus').addClass('fa-plus').removeClass('fa-minus');
 	}
 
 	else { 
 		CCROsettings.toggle = 1;
 
 		$(".CCROoverlayui").removeClass('collapsed');
+
+		$('.CCROv-toggle .fa-plus').addClass('fa-minus').removeClass('fa-plus');
 	}
 
 	CCROsaveSettings();
@@ -79,7 +81,7 @@ function CCROrenderValidationUI() {
 
 	//Check CCRO UI toggle state
 	if( CCROsettings.toggle == 0 ) {
-		$(".CCROvalidatorui").addClass('collapsed');
+		$(".CCROoverlayui").addClass('collapsed');
 	}
 
 	//Check if the experiment ID object contains anything
