@@ -7,8 +7,8 @@ function CCROsaveSettings() {
 
 //Opens the CCRO overlay UI
 function CCROopen() {
-	$.getScript('https://corvuscro.com/js/CCROcookieFunctions.min.js', function() {
-		$('head').append('<link rel="stylesheet" type="text/css" href="https://corvuscro.com/css/CCRObookmarklet.min.css"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">');
+	$.getScript('https://mjbeisch.github.io/ccro-bookmarklet/CCROcookieFunctions.min.js', function() {
+		$('head').append('<link rel="stylesheet" type="text/css" href="https://mjbeisch.github.io/ccro-bookmarklet/CCRObookmarklet.min.css"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">');
 
 		//Check for presence of CCROsettings cookie
 		if( CCROreadCookie('CCROsettings') ) {
