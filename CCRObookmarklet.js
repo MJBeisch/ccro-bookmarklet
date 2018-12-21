@@ -1,1 +1,1 @@
-document.body.appendChild(document.createElement('script')).src='https://mjbeisch.github.io/ccro-bookmarklet/CCROoverlay.min.css';
+document.body.appendChild(document.createElement('script')).src='https://mjbeisch.github.io/ccro-bookmarklet/CCROoverlay.min.js';
