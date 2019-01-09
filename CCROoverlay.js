@@ -125,9 +125,27 @@ function CCROrenderValidationUI() {
 
 		//Initialize page reload functionality for variation select elements
 		$(".experimentlist .variations select").change(function(event) {
-			selectedExperiment = $(this).attr("id");
-			selectedVariation = $(this).val();
-			window.location = window.location.protocol + "//" +window.location.host + "?_conv_eforce=" + selectedExperiment + "." + selectedVariation;
+			var selectedExperiment = $(this).attr("id"),
+				selectedVariation = $(this).val(),
+				newURL =  window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+			//Check for presence of query strings
+			if( window.location.search ) {
+				//Check if Convert variation forcing query string is present
+				if( window.location.search.indexOf("_conv_eforce") != -1 ) {
+					var currentSearch = window.location.search.split(/_conv_eforce=\d+\.\d+/);
+
+					newURL = newURL + currentSearch[0] + "_conv_eforce=" + selectedExperiment + "." + selectedVariation + currentSearch[1] + window.location.hash;
+				}
+				else {
+					newURL = newURL + window.location.search + "&_conv_eforce=" + selectedExperiment + "." + selectedVariation + window.location.hash;
+				}
+			}
+			else {
+				newURL = newURL + "?_conv_eforce=" + selectedExperiment + "." + selectedVariation + window.location.hash;
+			}
+
+			window.location = newURL;
 		});
 	}
 
