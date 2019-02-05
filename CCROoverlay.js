@@ -135,7 +135,8 @@ function CCROrenderValidationUI() {
 		//Initialize page reload functionality for variation select elements
 		$(".experimentlist .variations select").change(function(event) {
 			var selectedExperiment = $(this).attr("id"),
-				selectedVariation = $(this).val();
+				selectedVariation = $(this).val(),
+				newURL =  window.location.protocol + "//" + window.location.host + window.location.pathname;
 
 			//Check for presence of query strings
 			if( window.location.search ) {
