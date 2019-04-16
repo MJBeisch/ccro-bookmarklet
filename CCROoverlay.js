@@ -181,6 +181,11 @@ function CCROrenderValidationUI() {
 	$(".CCROv-toggle").click(function() {
 		CCROtoggle();
 	});
+
+	//Check if 'ccroqc' query string is set to active and toggle on validation cookie
+	if( window.location.href.indexOf('ccroqc=active') > 0 ) {
+    	$('.CCROsetcookie').click();
+  	};
 }
 
 if ( window.$ === undefined ) {
