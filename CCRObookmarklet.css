@@ -247,3 +247,7 @@ input:checked + .CCROslider:before {
 .CCROslider.CCROround:before {
   border-radius: 50%;
 }
+
+.CCROformRow { overflow:hidden; }
+
+.CCROformRow label, .CCROformRow select { float:left; margin:0 5px 0 0; }
