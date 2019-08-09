@@ -62,6 +62,8 @@ function CCROmarkActiveExperiment(experimentID) {
 	var experimentSelector = $( "#experiment-" + experimentID );
 
 	$( "#experiment-" + experimentID ).addClass("active");
+
+	$( "#" + experimentID ).prop("disabled", false);
 }
 
 //Draw the CCRO overlay UI
@@ -122,7 +124,7 @@ function CCROrenderValidationUI() {
 			}
 
 			//Build list item HTML for experiment
-			$(".CCROoverlayui .experimentlist").append("<tr id=\"experiment-" + experimentId + "\"><td class=\"experiment-name\"><i class=\"fas fa-circle\"></i> " + experimentName + "</td><td class=\"variations\"><select id=\"" + experimentId + "\">" + variationOptions + "</select></td><!--<td class=\"results-link\"><a class=\"CCROv-button\" href=\"#\" target=\"_blank\">View Results</a></td>--></tr>" );
+			$(".CCROoverlayui .experimentlist").append("<tr id=\"experiment-" + experimentId + "\"><td class=\"experiment-name\"><i class=\"fas fa-circle\"></i> " + experimentName + "</td><td class=\"variations\"><select disabled id=\"" + experimentId + "\">" + variationOptions + "</select></td><!--<td class=\"results-link\"><a class=\"CCROv-button\" href=\"#\" target=\"_blank\">View Results</a></td>--></tr>" );
 		}
 
 		//Mark active experiments
@@ -133,26 +135,33 @@ function CCROrenderValidationUI() {
 		//Initialize page reload functionality for variation select elements
 		$(".experimentlist .variations select").change(function(event) {
 			var selectedExperiment = $(this).attr("id"),
-				selectedVariation = $(this).val(),
-				newURL =  window.location.protocol + "//" + window.location.host + window.location.pathname;
+				selectedVariation = $(this).val();
+				//newURL =  window.location.protocol + "//" + window.location.host + window.location.pathname;
 
+			window._conv_q = window._conv_q || [];
+			window._conv_q.push(['assignVariation',selectedExperiment,selectedVariation]);
+			window._conv_q.push(["executeExperiment",selectedExperiment]);
+			window.location.reload(true);
+
+			/*
 			//Check for presence of query strings
 			if( window.location.search ) {
 				//Check if Convert variation forcing query string is present
 				if( window.location.search.indexOf("convert_action=convert_vpreview") != -1 ) {
 					var currentSearch = window.location.search.split(/convert_action=convert_vpreview&convert_v=\d+&convert_e=\d+/);
 
-					newURL = newURL + currentSearch[0] + "convert_action=convert_vpreview&convert_v=" + selectedVariation + "&convert_e=" + currentSearch[1] + window.location.hash;
+					newURL = newURL + currentSearch[0] + "convert_action=convert_vpreview&convert_v" + selectedVariation + "&convert_e" + currentSearch[1] + window.location.hash;
 				}
 				else {
-					newURL = newURL + "&convert_action=convert_vpreview&convert_v=" + selectedVariation + "&convert_e=" + selectedExperiment + window.location.hash;
+					newURL = newURL + "&convert_action=convert_vpreview&convert_v" + selectedVariation + "&convert_e" + selectedExperiment + window.location.hash;
 				}
 			}
 			else {
-				newURL = newURL + "?convert_action=convert_vpreview&convert_v=" + selectedVariation + "&convert_e=" + selectedExperiment + window.location.hash;
+				newURL = newURL + "?convert_action=convert_vpreview&convert_v" + selectedVariation + "&convert_e" + selectedExperiment + window.location.hash;
 			}
 
 			window.location = newURL;
+			*/
 		});
 	}
 
