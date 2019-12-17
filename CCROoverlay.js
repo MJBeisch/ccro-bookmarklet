@@ -77,6 +77,11 @@ function CCROrenderValidationUI() {
     experimentLoop = 0, //Initialize experiment loop iterator
     activeStateLoop = 0; //Initialize targeting loop
 
+  //Check if 'ccroqc' query string is set to active and toggle on validation cookie
+  if( window.location.href.indexOf('ccroqc=active') > 0 ) {
+      CCROcreateCookie('CCROvalidation','active',1);
+  }
+
   //Check for presence of CCROvalidation cookie
   if( CCROreadCookie('CCROvalidation') ) {
     CCROvalidationCookieCheck = 'checked';
@@ -86,7 +91,7 @@ function CCROrenderValidationUI() {
   jQuery(".CCROoverlayui").remove();
 
   //Draw base UI continer elements
-  jQuery("body").append('<div class="CCROoverlayui"><div class="CCROoverlayOptions">Validation Cookie <label class="CCROswitch CCROsetcookie"><input type="checkbox" ' + CCROvalidationCookieCheck + '><span class="CCROslider CCROround"></span></label></div><div class="CCROoverlayuiscroll"><div class="CCROoverlayuicontent"></div></div><div class="CCROv-header"><div class="CCROv-ui-buttons"><button class="CCROv-toggle CCROv-button"><i class="fas fa-minus"></i></button><button class="CCROv-close CCROv-button"><i class="fas fa-times"></i></button></div><h2>Corvus CRO Experiment Overlay</h2></div></div>');
+  jQuery("body").append('<div class="CCROoverlayui"><div class="CCROv-header"><h2>Corvus CRO Experiment Overlay</h2></div><div class="CCROoverlayuiscroll"><div class="CCROoverlayuicontent"></div></div><div class="CCROoverlayOptions"><div class="CCROv-ui-buttons"><button class="CCROv-toggle CCROv-button"><i class="fas fa-minus"></i></button><button class="CCROv-close CCROv-button"><i class="fas fa-times"></i></button></div><label class="CCROswitch CCROsetcookie"><input type="checkbox" ' + CCROvalidationCookieCheck + '><span class="CCROslider CCROround"></span></label>QC Mode</div></div>');
 
   //Check CCRO UI toggle state
   if( CCROsettings.toggle == 0 ) {
@@ -188,13 +193,6 @@ function CCROrenderValidationUI() {
   jQuery(".CCROv-toggle").click(function() {
     CCROtoggle();
   });
-
-  //Check if 'ccroqc' query string is set to active and toggle on validation cookie
-  if( window.location.href.indexOf('ccroqc=active') > 0 ) {
-        CCROcreateCookie('CCROvalidation','active',1);
-
-        jQuery('.CCROsetcookie input').prop('checked');
-    };
 }
 
 if ( window.jQuery === undefined ) {
