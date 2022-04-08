@@ -182,6 +182,7 @@ function CCROrenderValidationUI() {
     else {
       CCROexpireCookie('CCROvalidation');
     }
+    window.location.reload(true);
   });
 
   //Initialize CCRO UI close button functionality
