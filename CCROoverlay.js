@@ -66,51 +66,28 @@ function CCROmarkActiveExperiment(experimentID) {
   jQuery( "#" + experimentID ).prop("disabled", false);
 }
 
-//Draw the CCRO overlay UI
-function CCROrenderValidationUI() {
+function CCRORenderConvertExperimentList(experiments) {
   var CCROvalidationCookieCheck = '', //Initialize CCRO cookie checkbox check
-    convertVariationCookie = CCROreadCookie('_conv_v'), //grab data in Convert variation cookie
-    experiments = window.convert.data.experiments, //grab experiment object from Optimizely API
-    experimentIds = Object.keys(experiments), //grab experiment Ids from Optimizely API
-    activeExperiments = window.convert.currentData.experiments, //grab active experiments from Optimizely API
-    activeExperimentIds = Object.keys(activeExperiments), //grab active experiment Ids
-    experimentLoop = 0, //Initialize experiment loop iterator
-    activeStateLoop = 0; //Initialize targeting loop
+      ConvertVariationCookie = CCROreadCookie('_conv_v'), //grab data in Convert variation cookie
+      experimentIds = Object.keys(experiments), //grab experiment Ids from Optimizely API
+      activeExperiments = window.convert.currentData.experiments, //grab active experiments from Optimizely API
+      activeExperimentIds = Object.keys(activeExperiments), //grab active experiment Ids
+      experimentLoop = 0, //Initialize experiment loop iterator
+      activeStateLoop = 0; //Initialize targeting loop
 
-  //Check if 'ccroqc' query string is set to active and toggle on validation cookie
-  if( window.location.href.indexOf('ccroqc=active') > 0 ) {
-      CCROcreateCookie('CCROvalidation','active',1);
-  }
-
-  //Check for presence of CCROvalidation cookie
-  if( CCROreadCookie('CCROvalidation') ) {
-    CCROvalidationCookieCheck = 'checked';
-  }
-
-  //Clear old UI
-  jQuery(".CCROoverlayui").remove();
-
-  //Draw base UI continer elements
-  jQuery("body").append('<div class="CCROoverlayui"><div class="CCROv-header"><h2>Corvus CRO Experiment Overlay</h2></div><div class="CCROoverlayuiscroll"><div class="CCROoverlayuicontent"></div></div><div class="CCROoverlayOptions"><div class="CCROv-ui-buttons"><button class="CCROv-toggle CCROv-button"><i class="fas fa-minus"></i></button><button class="CCROv-close CCROv-button"><i class="fas fa-times"></i></button></div><label class="CCROswitch CCROsetcookie"><input type="checkbox" ' + CCROvalidationCookieCheck + '><span class="CCROslider CCROround"></span></label>QC Mode</div></div>');
-
-  //Check CCRO UI toggle state
-  if( CCROsettings.toggle == 0 ) {
-    jQuery(".CCROoverlayui").addClass('collapsed');
-  }
-
-  //Check if the experiment ID object contains anything
+    //Check if the experiment ID object contains anything
   if ( experimentIds.length > 0 ) {
     //Draw experiment list table container element
-    jQuery(".CCROoverlayuicontent").append("<table class=\"experimentlist\"><caption>Experiment List</caption><thead><tr><th class=\"experiment-name\">Experiment Name</th><th class=\"variations\">Variations</th><!--<th class=\"results-link\">Results</th>--></tr></thead><tbody></tbody></table>");
+    jQuery(".CCROoverlayuicontent").append("<table class=\"experimentlist\"><caption>Convert Experiences Experiment List</caption><thead><tr><th class=\"experiment-name\">Experiment Name</th><th class=\"variations\">Variations</th><!--<th class=\"results-link\">Results</th>--></tr></thead><tbody></tbody></table>");
 
     //Loop through experiment Ids
     for (; experimentLoop < experimentIds.length; ++experimentLoop) {
       var experimentId = experimentIds[experimentLoop], //Get experiment Id for current iteration through loop
-        experimentName = experiments[experimentId].n, //Get experiment name
-        experimentVariations = experiments[experimentId].vars, //Get variations for experiment
-        experimentVariationIds = Object.keys(experimentVariations), //Get variation IDs from experimentVariations object
-        variationLoop = 0, //Initialize variation loop iterator
-        variationOptions = ""; //Initialize variation options HTML container
+          experimentName = experiments[experimentId].n, //Get experiment name
+          experimentVariations = experiments[experimentId].vars, //Get variations for experiment
+          experimentVariationIds = Object.keys(experimentVariations), //Get variation IDs from experimentVariations object
+          variationLoop = 0, //Initialize variation loop iterator
+          variationOptions = ""; //Initialize variation options HTML container
 
       //Loop through this experiments variations
       for (; variationLoop < experimentVariationIds.length; ++variationLoop) {
@@ -119,7 +96,7 @@ function CCROrenderValidationUI() {
 
         //Check if the variation has a name (value of "null" for name means it is a personalization experiment and variation shouldn't be an option in the select dropdown)
         if( variationName != null ) {
-          if( convertVariationCookie.indexOf(variationId) != -1 ) {
+          if( ConvertVariationCookie.indexOf(variationId) != -1 ) {
             variationOptions += "<option value=\"" + variationId + "\" selected>" + variationName + "</option>";
           }
           else {
@@ -171,7 +148,40 @@ function CCROrenderValidationUI() {
   }
 
   else {
-    jQuery(".CCROoverlayuicontent").append("<p>There are currently no experiments built for this site.</p>");
+    jQuery(".CCROoverlayuicontent").append("<p>There are currently no Convert Experiences experiments built for this site.</p>");
+  }
+}
+
+//Draw the CCRO overlay UI
+function CCROrenderValidationUI() {
+  var CCROvalidationCookieCheck = '', //Initialize CCRO cookie checkbox check
+      ConvertVariationCookie = CCROreadCookie('_conv_v'), //grab data in Convert variation cookie
+      ConvertExperiments = window.convert.data.experiments, //grab experiment object from Optimizely API
+      ConvertExperimentIds = Object.keys(ConvertExperiments), //grab experiment Ids from Optimizely API
+      ConvertActiveExperiments = window.convert.currentData.experiments, //grab active experiments from Optimizely API
+      ConvertActiveExperimentIds = Object.keys(ConvertActiveExperiments), //grab active experiment Ids
+      ConvertExperimentLoop = 0, //Initialize experiment loop iterator
+      ConvertActiveStateLoop = 0; //Initialize targeting loop
+
+  //Check if 'ccroqc' query string is set to active and toggle on validation cookie
+  if( window.location.href.indexOf('ccroqc=active') > 0 ) {
+    CCROcreateCookie('CCROvalidation','active',1);
+  }
+
+  //Check for presence of CCROvalidation cookie
+  if( CCROreadCookie('CCROvalidation') ) {
+    CCROvalidationCookieCheck = 'checked';
+  }
+
+  //Clear old UI
+  jQuery(".CCROoverlayui").remove();
+
+  //Draw base UI continer elements
+  jQuery("body").append('<div class="CCROoverlayui"><div class="CCROv-header"><h2>Corvus CRO Experiment Overlay</h2></div><div class="CCROoverlayuiscroll"><div class="CCROoverlayuicontent"></div></div><div class="CCROoverlayOptions"><div class="CCROv-ui-buttons"><button class="CCROv-toggle CCROv-button"><i class="fas fa-minus"></i></button><button class="CCROv-close CCROv-button"><i class="fas fa-times"></i></button></div><label class="CCROswitch CCROsetcookie"><input type="checkbox" ' + CCROvalidationCookieCheck + '><span class="CCROslider CCROround"></span></label>QC Mode</div></div>');
+
+  //Check CCRO UI toggle state
+  if( CCROsettings.toggle == 0 ) {
+    jQuery(".CCROoverlayui").addClass('collapsed');
   }
 
   //Initialize CCROvalidation cookie toggle slider functionality
@@ -194,6 +204,11 @@ function CCROrenderValidationUI() {
   jQuery(".CCROv-toggle").click(function() {
     CCROtoggle();
   });
+
+  //Check for Convert Experiences JS data and render Convert module
+  if( window.convert.data.experiments ) {
+    CCRORenderConvertExperimentList(window.convert.data.experiments);
+  }
 }
 
 if ( window.jQuery === undefined ) {
