@@ -154,14 +154,7 @@ function CCRORenderConvertExperimentList(experiments) {
 
 //Draw the CCRO overlay UI
 function CCROrenderValidationUI() {
-  var CCROvalidationCookieCheck = '', //Initialize CCRO cookie checkbox check
-      ConvertVariationCookie = CCROreadCookie('_conv_v'), //grab data in Convert variation cookie
-      ConvertExperiments = window.convert.data.experiments, //grab experiment object from Optimizely API
-      ConvertExperimentIds = Object.keys(ConvertExperiments), //grab experiment Ids from Optimizely API
-      ConvertActiveExperiments = window.convert.currentData.experiments, //grab active experiments from Optimizely API
-      ConvertActiveExperimentIds = Object.keys(ConvertActiveExperiments), //grab active experiment Ids
-      ConvertExperimentLoop = 0, //Initialize experiment loop iterator
-      ConvertActiveStateLoop = 0; //Initialize targeting loop
+  var CCROvalidationCookieCheck = ''; //Initialize CCRO cookie checkbox check
 
   //Check if 'ccroqc' query string is set to active and toggle on validation cookie
   if( window.location.href.indexOf('ccroqc=active') > 0 ) {
@@ -205,8 +198,8 @@ function CCROrenderValidationUI() {
     CCROtoggle();
   });
 
-  //Check for Convert Experiences JS data and render Convert module
-  if( window.convert.data.experiments ) {
+  //Check for Convert Experiences JS object and render Convert module if present
+  if( window.convert ) {
     CCRORenderConvertExperimentList(window.convert.data.experiments);
   }
 }
