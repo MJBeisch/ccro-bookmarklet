@@ -24,7 +24,7 @@ function CCROsetCookie(name,value,time,period) {
 		expires = "; expires=" + date.toUTCString();
 	}
 	
-	document.cookie = name + "=" + ( (value) || "")  + expires + "; path=/";
+	document.cookie = name + "=" + ( ( encodeURIComponent(value) ) || "")  + expires + "; path=/";
 }
 
 //Read a cookie
@@ -37,7 +37,7 @@ function CCROreadCookie(name) {
 
 		while (c.charAt(0)==' ') c = c.substring(1,c.length);
 
-		if (c.indexOf(nameEQ) == 0) return ( c.substring(nameEQ.length,c.length) );
+		if (c.indexOf(nameEQ) == 0) return ( decodeURIComponent(c.substring(nameEQ.length,c.length) ) );
 	}
 	return null;
 }
