@@ -54,7 +54,7 @@ function CCROsaveSettings() {
 
 //Opens the CCRO overlay UI
 function CCROopen() {
-	jQuery('head').append('<link rel="stylesheet" type="text/css" href="https://mjbeisch.github.io/ccro-bookmarklet/CCRObookmarklet.min.css"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">');
+	jQuery('head').append('<link rel="stylesheet" type="text/css" href="https://mjbeisch.github.io/ccro-bookmarklet/CCRObookmarklet.min.css">');
 
 	//Check for presence of CCROsettings cookie
 	if( CCROreadCookie('CCROsettings') ) {
@@ -90,7 +90,7 @@ function CCROtoggle() {
 
 		jQuery(".CCROoverlayui").addClass('collapsed');
 
-		jQuery('.CCROv-toggle .fa-minus').addClass('fa-plus').removeClass('fa-minus');
+		jQuery('.CCROv-toggle').text('+');
 	}
 
 	else { 
@@ -98,7 +98,7 @@ function CCROtoggle() {
 
 		jQuery(".CCROoverlayui").removeClass('collapsed');
 
-		jQuery('.CCROv-toggle .fa-plus').addClass('fa-minus').removeClass('fa-plus');
+		jQuery('.CCROv-toggle').text('-');
 	}
 
 	CCROsaveSettings();
@@ -153,7 +153,7 @@ function CCRORenderConvertExperimentList(experiments) {
 			}
 
 			//Build list item HTML for experiment
-			jQuery(".CCROoverlayui .experimentlist").append("<tr id=\"experiment-" + experimentId + "\"><td class=\"experiment-name\"><i class=\"fas fa-circle\"></i> " + experimentName + "</td><td class=\"variations\"><select disabled id=\"" + experimentId + "\">" + variationOptions + "</select></td><!--<td class=\"results-link\"><a class=\"CCROv-button\" href=\"#\" target=\"_blank\">View Results</a></td>--></tr>" );
+			jQuery(".CCROoverlayui .experimentlist").append("<tr id=\"experiment-" + experimentId + "\"><td class=\"experiment-name\"><span class=\"CCRO-active-circle\"></span> " + experimentName + "</td><td class=\"variations\"><select disabled id=\"" + experimentId + "\">" + variationOptions + "</select></td><!--<td class=\"results-link\"><a class=\"CCROv-button\" href=\"#\" target=\"_blank\">View Results</a></td>--></tr>" );
 		}
 
 		//Mark active experiments
@@ -217,7 +217,7 @@ function CCROrenderValidationUI() {
 	jQuery(".CCROoverlayui").remove();
 
 	//Draw base UI continer elements
-	jQuery("body").append('<div class="CCROoverlayui"><div class="CCROv-header"><h2>Corvus CRO Experiment Overlay</h2></div><div class="CCROoverlayuiscroll"><div class="CCROoverlayuicontent"></div></div><div class="CCROoverlayOptions"><div class="CCROv-ui-buttons"><button class="CCROv-toggle CCROv-button"><i class="fas fa-minus"></i></button><button class="CCROv-close CCROv-button"><i class="fas fa-times"></i></button></div><label class="CCROswitch CCROsetcookie"><input type="checkbox" ' + CCROvalidationCookieCheck + '><span class="CCROslider CCROround"></span></label>QC Mode</div></div>');
+	jQuery("body").append('<div class="CCROoverlayui"><div class="CCROv-header"><h2>Corvus CRO Experiment Overlay</h2></div><div class="CCROoverlayuiscroll"><div class="CCROoverlayuicontent"></div></div><div class="CCROoverlayOptions"><div class="CCROv-ui-buttons"><button class="CCROv-toggle CCROv-button">-</button><button class="CCROv-close CCROv-button">x</button></div><label class="CCROswitch CCROsetcookie"><input type="checkbox" ' + CCROvalidationCookieCheck + '><span class="CCROslider CCROround"></span></label>QC Mode</div></div>');
 
 	//Check CCRO UI toggle state
 	if( CCROsettings.toggle == 0 ) {

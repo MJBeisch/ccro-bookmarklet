@@ -145,12 +145,18 @@
 	font-weight: bold;
 }
 
-.CCROoverlayuicontent .experiment-name .fa-circle {
-	color: #FFEB40;
+.CCROoverlayuicontent .experiment-name .CCRO-active-circle {
+	background-color:#ffeb40;
+	border:1px solid #000;
+	border-radius:50%;
+	display:inline-block;
+	height:12px;
+	width:12px;
+	vertical-align:middle;
 }
 
-.CCROoverlayuicontent tr.active .experiment-name .fa-circle {
-	color: #BDCE62;
+.CCROoverlayuicontent tr.active .experiment-name .CCRO-active-circle {
+	background-color:#bdce62;
 }
 
 .CCROoverlayuicontent .experimentlist select {
