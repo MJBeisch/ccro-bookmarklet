@@ -217,7 +217,7 @@ function CCROrenderValidationUI() {
 	jQuery(".CCROoverlayui").remove();
 
 	//Draw base UI continer elements
-	jQuery("body").append('<div class="CCROoverlayui"><div class="CCROv-header"><h2>Corvus CRO Experiment Overlay</h2></div><div class="CCROoverlayuiscroll"><div class="CCROoverlayuicontent"></div></div><div class="CCROoverlayOptions"><div class="CCROv-ui-buttons"><button class="CCROv-toggle CCROv-button">-</button><button class="CCROv-close CCROv-button">x</button></div><label class="CCROswitch CCROsetcookie"><input type="checkbox" ' + CCROvalidationCookieCheck + '><span class="CCROslider CCROround"></span></label>QC Mode</div></div>');
+	jQuery("body").append('<div class="CCROoverlayui"><div class="CCROv-header"><h2>Omnitail Experiment Overlay</h2></div><div class="CCROoverlayuiscroll"><div class="CCROoverlayuicontent"></div></div><div class="CCROoverlayOptions"><div class="CCROv-ui-buttons"><button class="CCROv-toggle CCROv-button">-</button><button class="CCROv-close CCROv-button">x</button></div><label class="CCROswitch CCROsetcookie"><input type="checkbox" ' + CCROvalidationCookieCheck + '><span class="CCROslider CCROround"></span></label>QC Mode</div></div>');
 
 	//Check CCRO UI toggle state
 	if( CCROsettings.toggle == 0 ) {
