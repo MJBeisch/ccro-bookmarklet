@@ -245,9 +245,13 @@ function CCROrenderValidationUI() {
 		CCROtoggle();
 	});
 
-	//Check for Convert Experiences JS object and render Convert module if present
-	if( window.convert ) {
+	//Check for Convert Experiences JS object V3 and render Convert module if present
+	if( window.convert.data.experiments ) {
 		CCRORenderConvertExperimentList(window.convert.data.experiments);
+	}
+	//Check for Convert Experiences JS object V4 and render Convert module if present
+	else if( window.convert.data.experiences ) {
+		CCRORenderConvertExperimentList(window.convert.data.experiences);
 	}
 }
 
