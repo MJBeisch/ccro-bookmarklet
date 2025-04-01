@@ -113,11 +113,10 @@ function CCROmarkActiveExperiment(experimentID) {
 	jQuery( "#" + experimentID ).prop("disabled", false);
 }
 
-function CCRORenderConvertExperimentList(experiments) {
+function CCRORenderConvertExperimentList(experiments,activeExperiments,experimentNameKey,experimentVariationsKey) {
 	var CCROvalidationCookieCheck = '', //Initialize CCRO cookie checkbox check
 			ConvertVariationCookie = CCROreadCookie('_conv_v'), //grab data in Convert variation cookie
 			experimentIds = Object.keys(experiments), //grab experiment Ids from Optimizely API
-			activeExperiments = window.convert.currentData.experiments, //grab active experiments from Optimizely API
 			activeExperimentIds = Object.keys(activeExperiments), //grab active experiment Ids
 			experimentLoop = 0, //Initialize experiment loop iterator
 			activeStateLoop = 0; //Initialize targeting loop
@@ -130,8 +129,8 @@ function CCRORenderConvertExperimentList(experiments) {
 		//Loop through experiment Ids
 		for (; experimentLoop < experimentIds.length; ++experimentLoop) {
 			var experimentId = experimentIds[experimentLoop], //Get experiment Id for current iteration through loop
-					experimentName = experiments[experimentId].n, //Get experiment name
-					experimentVariations = experiments[experimentId].vars, //Get variations for experiment
+					experimentName = experiments[experimentId][experimentNameKey], //Get experiment name
+					experimentVariations = experiments[experimentId][experimentVariationsKey], //Get variations for experiment
 					experimentVariationIds = Object.keys(experimentVariations), //Get variation IDs from experimentVariations object
 					variationLoop = 0, //Initialize variation loop iterator
 					variationOptions = ""; //Initialize variation options HTML container
@@ -247,11 +246,11 @@ function CCROrenderValidationUI() {
 
 	//Check for Convert Experiences JS object V3 and render Convert module if present
 	if( window.convert.data.experiments ) {
-		CCRORenderConvertExperimentList(window.convert.data.experiments);
+		CCRORenderConvertExperimentList(window.convert.data.experiments, window.convert.currentData.experiments,"n","vars");
 	}
 	//Check for Convert Experiences JS object V4 and render Convert module if present
 	else if( window.convert.data.experiences ) {
-		CCRORenderConvertExperimentList(window.convert.data.experiences);
+		CCRORenderConvertExperimentList(window.convert.data.experiences, window.convert.currentData.experiences,"name","variations");
 	}
 }
 
