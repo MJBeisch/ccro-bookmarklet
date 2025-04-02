@@ -116,24 +116,25 @@ function CCROmarkActiveExperiment(experimentID) {
 function CCRORenderConvertExperimentList(experiments,activeExperiments,experimentNameKey,experimentVariationsKey) {
 	var CCROvalidationCookieCheck = '', //Initialize CCRO cookie checkbox check
 			ConvertVariationCookie = CCROreadCookie('_conv_v'), //grab data in Convert variation cookie
-			experimentIds = Object.keys(experiments), //grab experiment Ids from Optimizely API
-			activeExperimentIds = Object.keys(activeExperiments), //grab active experiment Ids
+			experimentList = Object.keys(experiments), //grab experiment list
+			activeexperimentList = Object.keys(activeExperiments), //grab active experiment experiments
 			experimentLoop = 0, //Initialize experiment loop iterator
 			activeStateLoop = 0; //Initialize targeting loop
 
 		//Check if the experiment ID object contains anything
-	if ( experimentIds.length > 0 ) {
+	if ( experimentList.length > 0 ) {
 		//Draw experiment list table container element
 		jQuery(".CCROoverlayuicontent").append("<table class=\"experimentlist\"><caption>Convert Experiences Experiment List</caption><thead><tr><th class=\"experiment-name\">Experiment Name</th><th class=\"variations\">Variations</th><!--<th class=\"results-link\">Results</th>--></tr></thead><tbody></tbody></table>");
 
 		//Loop through experiment Ids
-		for (; experimentLoop < experimentIds.length; ++experimentLoop) {
-			var experimentId = experimentIds[experimentLoop], //Get experiment Id for current iteration through loop
-					experimentName = experiments[experimentId][experimentNameKey], //Get experiment name
-					experimentVariations = experiments[experimentId][experimentVariationsKey], //Get variations for experiment
-					experimentVariationIds = Object.keys(experimentVariations), //Get variation IDs from experimentVariations object
-					variationLoop = 0, //Initialize variation loop iterator
-					variationOptions = ""; //Initialize variation options HTML container
+		for (; experimentLoop < experimentList.length; ++experimentLoop) {
+			var experiment = experimentList[experimentLoop], //Get single experiment for current iteration through loop
+				experimentId = experiments[experiment].id //Get experiment ID
+				experimentName = experiments[experiment][experimentNameKey], //Get experiment name
+				experimentVariations = experiments[experiment][experimentVariationsKey], //Get variations for experiment
+				experimentVariationIds = Object.keys(experimentVariations), //Get variation IDs from experimentVariations object
+				variationLoop = 0, //Initialize variation loop iterator
+				variationOptions = ""; //Initialize variation options HTML container
 
 			//Loop through this experiments variations
 			for (; variationLoop < experimentVariationIds.length; ++variationLoop) {
@@ -156,8 +157,8 @@ function CCRORenderConvertExperimentList(experiments,activeExperiments,experimen
 		}
 
 		//Mark active experiments
-		for (; activeStateLoop < activeExperimentIds.length; ++activeStateLoop) {
-			CCROmarkActiveExperiment(activeExperimentIds[activeStateLoop]);
+		for (; activeStateLoop < activeexperimentList.length; ++activeStateLoop) {
+			CCROmarkActiveExperiment(activeexperimentList[activeStateLoop]);
 		}
 
 		//Initialize page reload functionality for variation select elements
