@@ -163,6 +163,10 @@ function CCRORenderConvertExperimentList(experiments,activeExperiments,experimen
 
 		//Initialize page reload functionality for variation select elements
 		jQuery(".experimentlist .variations select").change(function(event) {
+			if( !event.originalEvent ){
+				return;
+			}
+
 			var selectedExperiment = jQuery(this).attr("id"),
 				selectedVariation = jQuery(this).val();
 				//newURL =  window.location.protocol + "//" + window.location.host + window.location.pathname;
@@ -225,7 +229,10 @@ function CCROrenderValidationUI() {
 	}
 
 	//Initialize CCROvalidation cookie toggle slider functionality
-	jQuery('.CCROsetcookie input').change(function() {
+	jQuery('.CCROsetcookie input').change(function(event) {
+		if( !event.originalEvent ){
+			return;
+		}
 		if( jQuery(this).is(':checked') ) {
 			CCROsetCookie('CCROvalidation','active',1);
 		}
