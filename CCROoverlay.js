@@ -47,6 +47,26 @@ function CCROexpireCookie(name) {
 	document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
+//Get JS Object key value from a variable path
+function CCROgetValueByPath(JSobject, path) {
+	if (!JSobject || !path) return undefined;
+  
+	const keys = path.replace(/\[(\w+)\]/g, '.$1').split('.');
+
+	let current = JSobject;
+
+	for (const key of keys) {
+		if (current[key] !== undefined) {
+			current = current[key];
+		}
+		else {
+			return undefined;
+		}
+	  }
+
+	  return current;
+}
+
 //Save CCRO overlay settings into the CCROsettings cookie
 function CCROsaveSettings() {
 	CCROsetCookie("CCROsettings",JSON.stringify(CCROsettings),3650);
@@ -113,7 +133,7 @@ function CCROmarkActiveExperiment(experimentID) {
 	jQuery( "#" + experimentID ).prop("disabled", false);
 }
 
-function CCRORenderConvertExperimentList(experiments,activeExperiments,experimentNameKey,experimentVariationsKey) {
+function CCRORenderConvertExperimentList(experiments,activeExperiments,experimentNameKey,experimentVariationsKey,experimentVariationIdKey) {
 	var CCROvalidationCookieCheck = '', //Initialize CCRO cookie checkbox check
 			ConvertVariationCookie = CCROreadCookie('_conv_v'), //grab data in Convert variation cookie
 			experimentList = Object.keys(experiments), //grab experiment list
@@ -140,6 +160,12 @@ function CCRORenderConvertExperimentList(experiments,activeExperiments,experimen
 			for (; variationLoop < experimentVariationIds.length; ++variationLoop) {
 				var variationId = experimentVariationIds[variationLoop], //Get variation Id for current iteration through loop
 					variationName = experimentVariations[variationId].name; //Get variation name
+
+				if( experimentVariationIdKey ) {
+					variationId = CCROgetValueByPath( experimentVariations[variationId], experimentVariationIdKey );
+				}
+
+				console.log('CCRO - variationId = ' + variationId );
 
 				//Check if the variation has a name (value of "null" for name means it is a personalization experiment and variation shouldn't be an option in the select dropdown)
 				if( variationName != null ) {
@@ -258,7 +284,7 @@ function CCROrenderValidationUI() {
 	}
 	//Check for Convert Experiences JS object V4 and render Convert module if present
 	else if( window.convert.data.experiences ) {
-		CCRORenderConvertExperimentList(window.convert.data.experiences, window.convert.currentData.experiences,"name","variations");
+		CCRORenderConvertExperimentList(window.convert.data.experiences, window.convert.currentData.experiences,"name","variations","id");
 	}
 }
 
