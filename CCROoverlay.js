@@ -165,8 +165,6 @@ function CCRORenderConvertExperimentList(experiments,activeExperiments,experimen
 					variationId = CCROgetValueByPath( experimentVariations[variationId], experimentVariationIdKey );
 				}
 
-				console.log('CCRO - variationId = ' + variationId );
-
 				//Check if the variation has a name (value of "null" for name means it is a personalization experiment and variation shouldn't be an option in the select dropdown)
 				if( variationName != null ) {
 					if( ConvertVariationCookie.indexOf(variationId) != -1 ) {
